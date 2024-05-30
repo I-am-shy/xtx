@@ -29,8 +29,12 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // 2.自动配置elementPlus采用scss样式配色系统
-        additionalData: `@use "@/styles/element/index.scss" as *;`
+        // 2.自动导入，无需手动引用 
+        // elementPlus采用scss样式配色系统
+        additionalData: `
+        @use "@/styles/element/index.scss" as *;
+        @use "@/styles/var.scss" as *;
+        `
       }
     }
   }
