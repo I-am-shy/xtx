@@ -15,12 +15,23 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        //1.配置elementPlus采用scss样式配色系统
+        ElementPlusResolver({importStyle: 'sass'}),
+      ],
     }),
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // 2.自动配置elementPlus采用scss样式配色系统
+        additionalData: `@use "@/styles/element/index.scss" as *;`
+      }
     }
   }
 })
