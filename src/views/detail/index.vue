@@ -4,6 +4,7 @@ import { getDetail } from "@/apis/detail.js"
 import { ref, onMounted} from "vue";
 import detailHot from "@/views/detail/components/detailHot.vue"
 import imgView from "@/components/imgView/index.vue"
+import XtxSku from "@/components/XtxSku/index.vue"
 
 const route = useRoute();
 const detailData = ref({});
@@ -16,8 +17,13 @@ onMounted(() => {
     getDetailData();
 });
 
+// XtxSku组件返回的数据
+const SkuSelect = (data) => {
+    console.log(data);
+}
 
 </script>
+
 
 <template>
     <div class="xtx-goods-page">
@@ -87,7 +93,7 @@ onMounted(() => {
                                 </dl>
                             </div>
                             <!-- sku组件 -->
-
+                            <XtxSku :goods="detailData" @change="SkuSelect"/>
                             <!-- 数据组件 -->
 
                             <!-- 按钮组件 -->
