@@ -1,8 +1,9 @@
 <script setup>
 import { useCategoryStore } from '@/stores/category';
 
-const categoryStore = useCategoryStore()
 
+const categoryStore = useCategoryStore()
+// console.log(categoryStore.categoryList)
 
 
 </script>
@@ -14,8 +15,12 @@ const categoryStore = useCategoryStore()
                 <RouterLink to="/">小兔鲜</RouterLink>
             </h1>
             <ul class="app-header-nav">
-                <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
-                    <RouterLink to="/">{{ item.name }}</RouterLink>
+                <li class="home">
+                    <RouterLink  to="/">首页</RouterLink>
+                </li>
+                <li v-for="item in categoryStore.categoryList" :key="item.id">
+                    <!-- active-class触发后绑定类名 -->
+                    <RouterLink active-class="active" :to="`/Category/${item.id}`">{{ item.name }}</RouterLink>
                 </li>
             </ul>
             <div class="search">
@@ -126,7 +131,7 @@ const categoryStore = useCategoryStore()
 
         .active {
             color: $xtxColor;
-            border-bottom: 1px solid $xtxColor;
+            border-bottom: 2px solid $xtxColor;
         }
     }
 }

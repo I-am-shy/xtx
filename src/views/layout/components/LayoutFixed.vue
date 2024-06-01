@@ -16,7 +16,7 @@ const categoryStore = useCategoryStore()
       <!-- 导航区域 -->
       <ul class="app-header-nav">
                 <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
-                    <RouterLink to="/">{{ item.name }}</RouterLink>
+                    <RouterLink active-class="active" :to="`/Category/${item.id}`">{{ item.name }}</RouterLink>
                 </li>
             </ul>
       <div class="right">
@@ -108,7 +108,7 @@ const categoryStore = useCategoryStore()
 
     .active {
       color: $xtxColor;
-      border-bottom: 1px solid $xtxColor;
+      border-bottom: 2px solid $xtxColor;
     }
   }
 }

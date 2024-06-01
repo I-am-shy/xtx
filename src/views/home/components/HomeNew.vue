@@ -8,7 +8,7 @@ const newList = ref([]);
 onMounted(() => {
     getNewList().then(res => {
         newList.value = res.result;
-        console.log(res.result);
+        // console.log(res.result);
     })
 })
 

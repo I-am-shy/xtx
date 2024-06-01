@@ -3,7 +3,7 @@ import login from '@/views/login/index.vue'
 import layout from '../views/layout/index.vue'
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -16,9 +16,14 @@ const router = createRouter({
           component: () => import('@/views/home/index.vue')
         },
         {
-          path: "Categroy",
+          path: "Category/:id",//动态路由数据
           name: "Category",
           component: () => import("@/views/Category/index.vue")
+        },
+        {
+          path: "Category/sub/:id",
+          name: "sub",
+          component: () => import("@/views/subCategory/index.vue")
         }
       ]
     },

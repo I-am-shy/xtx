@@ -8,7 +8,7 @@ const hotList = ref([]);
 onMounted(async () => {
     const res = await getHotList();
     hotList.value = res.result;
-    console.log(res.result);
+    // console.log(res.result);
 })
 
 </script>

@@ -8,7 +8,7 @@ import App from './App.vue'
 import router from './router'
 import { lazyPlugin } from './directives/index'
 
-import { getCategory } from './apis/testAPI'
+// import { getCategory } from './apis/testAPI'
 
 // // 测试API
 // getCategory().then(res => {

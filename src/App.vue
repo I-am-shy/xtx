@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 <template>
   <RouterView />
+  <el-backtop :right="100" :bottom="100" />
 </template>
 
 <style scoped lang="scss">

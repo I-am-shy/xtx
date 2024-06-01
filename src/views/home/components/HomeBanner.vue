@@ -7,7 +7,7 @@ const bannerList = ref([]);
 onMounted(async () => {
     const res = await getBannerList();
     bannerList.value = res.result;
-    console.log(bannerList.value);
+    // console.log(bannerList.value);
 })
 
 
@@ -15,7 +15,7 @@ onMounted(async () => {
 
 <template>
     <div class="banner">
-        <el-carousel :interval="3000" type="card" height="400px" arrow="never" mation-blur="true">
+        <el-carousel :interval="3000" type="" height="500px" arrow="never" mation-blur="true">
             <el-carousel-item v-for="item in bannerList" :key="item">
                 <img :src="item.imgUrl" alt="">
             </el-carousel-item>
@@ -34,17 +34,12 @@ onMounted(async () => {
     background-color: #f5f5f5ac;
     transition: 0.3s ease-in-out;
     &:hover{
-        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
-        inset 0 4px rgba(0, 0, 0, 0.3),
-        inset 0 -4px rgba(0,0,0,0.3);
-        transform: translateY(-4px);
-        height: 508px;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
         border-radius: 5px ;
     }
     
     img {
-        margin-top: 50px;
-        height: 400px;
+        height: 500px;
         object-fit: cover;
     }
 

@@ -19,6 +19,8 @@ onMounted(() => {
     <LayoutFixed></LayoutFixed>
     <LayoutNav></LayoutNav>
     <LayoutHeader></LayoutHeader>
+    <!-- 设置key 取消路由缓存，销毁组件重置数据 -->
+    <!-- <router-view :key="$route.path"></router-view> -->
     <router-view></router-view>
     <LayoutFooter></LayoutFooter>
 </template>
