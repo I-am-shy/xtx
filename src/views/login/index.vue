@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from"vue";
 import { useRouter} from "vue-router"
-import {login} from '@/apis/user.js'
+import {useUserStore} from '@/stores/user.js'
 import { ElMessage } from "element-plus";
 import 'element-plus/theme-chalk/el-message.css'
 
@@ -40,6 +40,8 @@ const rules = ref({
         trigger:'change'
     }]
 })
+// 
+const {getUserInfo,userInfo} = useUserStore();
 
 const doLogin = () =>{
     // console.log(form.value)
@@ -50,10 +52,10 @@ const doLogin = () =>{
         if(valid){
             // console.log('表单验证通过');
             // 验证通过，发送登录请求
-            const res = await login({account,password});
-            // console.log(res);
+            await getUserInfo({account,password});
             // 登录成功，跳转到首页
             ElMessage({type:'success',message:'登录成功'})
+            // console.log(userInfo);
             router.replace({ path:'/'});
         }else{
             // console.log('表单验证失败');
