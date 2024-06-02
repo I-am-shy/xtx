@@ -1,4 +1,18 @@
 <script setup>//组合式API
+import { useUserStore } from '@/stores/user';
+import { ElMessage } from 'element-plus';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const {userInfo,clearUserInfo} = useUserStore()
+
+const confirm = () => {
+    // console.log("退出登录")
+    clearUserInfo();
+    // 跳转到登录页
+    router.push('/login');
+    ElMessage({ message: '退出登录成功', type: 'success' })
+}
 
 </script>
 
@@ -7,11 +21,11 @@
         <div class="container">
             <ul>
                 <!-- 多模板渲染，区分登录与非登录状态 -->
-                <template v-if="false">
+                <template v-if="userInfo.token">
                     <!-- 不使用a标签的href跳转（丢失响应性） -->
-                    <li><a href="javascpript:;"><i class="iconfont icon-user"></i>周杰伦</a></li>
+                    <li><a href="javascpript:;"><i class="iconfont icon-user"></i>{{ userInfo.account }}</a></li>
                     <li>
-                        <el-popconfirm title="您确定要退出吗？" confirm-button-text="确认" cancel-button-text="取消">
+                        <el-popconfirm @confirm="confirm" title="您确定要退出吗？" confirm-button-text="确认" cancel-button-text="取消">
                             <template #reference>
                                 <a href="javascript:;" >退出登录</a>
                             </template>

@@ -12,9 +12,13 @@ export const useUserStore = defineStore('user', ()=>{
         // console.log(res);
         userInfo.value = res.result;
     }
+    const clearUserInfo = ()=>{//清除用户数据
+        userInfo.value = {};
+    }
     return{
         userInfo,
-        getUserInfo
+        getUserInfo,
+        clearUserInfo
     }
 },{
     persist:true,//开启路由缓存
