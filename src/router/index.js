@@ -39,7 +39,7 @@ const router = createRouter({
     },
     
   ],
-  scrollBehavior(){
+  scrollBehavior(){//路由时的滚动行为
     //每次路由返回顶部位置
     return{
       top:0,
