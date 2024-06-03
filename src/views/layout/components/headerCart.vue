@@ -22,7 +22,7 @@ const cartData = useCartStore()
                             <p class="attr ellipsis">{{ i.attrsText }}</p>
                         </div>
                         <div class="right">
-                            <p class="price">&yen;{{ i.price }}</p>
+                            <p class="price">&yen;{{  i.count * i.price }}</p>
                             <p class="count">x{{ i.count }}</p>
                         </div>
                     </RouterLink>
@@ -35,7 +35,7 @@ const cartData = useCartStore()
                     <p>共 {{ cartData.getSum }} 件商品</p>
                     <p>&yen; {{ cartData.getTotal.toFixed(2) }} </p>
                 </div>
-                <el-button size="large" type="primary">去购物车结算</el-button>
+                <el-button size="large" type="primary" @click="$router.push('/cartList')">去购物车结算</el-button>
             </div>
         </div>
     </div>
