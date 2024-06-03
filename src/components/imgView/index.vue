@@ -32,10 +32,11 @@ const layerMove = (e) => {
     // console.log(midlleX,midlleY);
     // 蒙层元素
     let layer = document.querySelector('.layer')
-    // console.log(layer.offsetTop,layer.offsetLeft);
+    // console.log(layer.offsetWidth,layer.offsetHeight);
+    // console.dir(layer);
     // 获取鼠标在盒子中的位置
-    layerX.value = e.x - midlleX - layer.offsetWidth / 2;
-    layerY.value = e.y - midlleY - layer.offsetHeight / 2;
+    layerX.value = e.x - midlleX - layer.offsetWidth/2;
+    layerY.value = e.y - midlleY - layer.offsetHeight/2;
     // 限制范围不超出大盒子
     if (layerX.value < 0) {
         layerX.value = 0;
@@ -64,7 +65,7 @@ const layerMove = (e) => {
             @mouseleave="isShow = false">
             <img :src="imageList[activeIndex]" alt="" />
             <!-- 蒙层小滑块 -->
-            <div v-if="isShow" class="layer" :style="{ left: `${layerX}px`, top: `${layerY}px` }"></div>
+            <div v-if="isShow" class="layer" :style="{ left: `${layerX}px`, top: `${layerY}px`}"></div>
         </div>
         <!-- 小图列表 -->
         <ul class="small">
