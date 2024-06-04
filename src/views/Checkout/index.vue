@@ -3,19 +3,45 @@ import { putOrder, getCheckInfo} from '@/apis/Checkout';
 import {useRouter} from "vue-router";
 import {ref,onMounted} from 'vue';
 import { useCartStore } from '@/stores/cart';
+import { addUserAdd } from './composables/addAdress';
 
 const router = useRouter();
 const cartStore = useCartStore();
 const checkInfo = ref({})  // 订单对象
 const curAddress = ref({})  // 地址对象
-const isShow = ref(false); //默认不可见弹窗
+const isShow = ref(false); //默认不可见地址切换
+const addFlag = ref(false); //默认不可见地址添加
 const selectedAddress = ref({}); //选中的弹窗地址对象
+const addAdress =  addUserAdd();
+//地址参数
+//   receiver: '姓名',
+//   contact: '联系方式',
+//   provinceCode: '省份编码',
+//   countyCode: '城市编码',
+//   address: '地区编码',
+//   postalCode: '详细地址',
+//   addressTags: '地址标签',
+//   isDefault: '是否默认,0是，1不是',
+//   fullLoaction: '完整地址'
+const userAdd = ref({
+  "receiver": '',
+  "contact": '',
+  "provinceCode": '',
+  "cityCode":'',
+  "countyCode": '',
+  "address": '',
+  "postalCode": '',
+  "addressTags": '',
+  "isDefault": '',
+  "fullLoaction": ''
+});
+
 
 onMounted(()=>{
   getCheckInfo().then(res=>{
     // 获取订单信息
     checkInfo.value = res.result
-    console.log(res.result);
+    // console.log(res.result);
 
     // 获取默认地址
     const address = res.result.userAddresses.find(item=>item.isDefault === 1)
@@ -59,6 +85,12 @@ async function createOrder(){
     }
   })
   cartStore.updateCart();
+}
+
+function submitAddress(){
+  console.log(JSON.stringify(userAdd.value))
+  addAdress.add(userAdd.value);
+  addFlag=false;
 }
 </script>
 
@@ -178,7 +210,26 @@ async function createOrder(){
     </template>
   </el-dialog>
   <!-- 添加地址 -->
-
+  <el-dialog title="添加收货地址" width="30%" center v-model="addFlag">
+    <div class="addressInfo">
+        <el-input style="margin: 5px auto;" v-model="userAdd.receiver"  placeholder="姓名" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.contact"  placeholder="联系方式" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.provinceCode"  placeholder="省份编码" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.cityCode"  placeholder="城市编码" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.countyCode"  placeholder="地区编码" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.address"  placeholder="详细地址" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.postalCode"  placeholder="邮政编码" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.addressTags"  placeholder="地址标签" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.isDefault"  placeholder="是否默认,0是，1不是" />
+        <el-input style="margin: 5px auto;" v-model="userAdd.fullLoaction"  placeholder="完整地址" />
+    </div>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button  @click="addFlag = false">取消</el-button>
+        <el-button type="primary" @click="submitAddress">确定</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped lang="scss">
@@ -392,5 +443,12 @@ async function createOrder(){
       line-height: 30px;
     }
   }
+}
+
+.addressInfo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from"vue";
+import { ref,onBeforeMount } from"vue";
 import { useRouter} from "vue-router"
 import {useUserStore} from '@/stores/user.js'
 import { ElMessage } from "element-plus";
