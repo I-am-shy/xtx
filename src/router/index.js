@@ -1,9 +1,12 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import login from '@/views/login/index.vue'
-import layout from '../views/layout/index.vue'
+import layout from '@/views/layout/index.vue'
+import member from '@/views/member/index.vue'
+import home from '@/views/home/index.vue'
+import userInfo from "@/views/member/components/userInfo.vue"
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -13,7 +16,7 @@ const router = createRouter({
         {
           path: '', //置空无空格，在访问‘/’主页时会默认渲染
           name: 'home',
-          component: () => import('@/views/home/index.vue')
+          component: home
         },
         {
           path: "Category/:id",//动态路由数据
@@ -33,7 +36,40 @@ const router = createRouter({
         {
           path: "cartList",
           name: "cartList",
-          component: () => import("@/views/cartList/index.vue")}
+          component: () => import("@/views/cartList/index.vue")
+        },
+        {
+          path: "Checkout",
+          name: "Checkout",
+          component: () => import("@/views/Checkout/index.vue")
+        },
+        {
+          path: "pay",
+          name: "pay",
+          component: () => import("@/views/pay/index.vue")
+        },
+        {
+          path: "paycallback",
+          name: "paycallback",
+          component: () => import("@/views/pay/payBack.vue")
+        },
+        {
+          path: "member",
+          name: "member",
+          component: member,
+          children: [
+            {
+              path: '',
+              name: 'userInfo',
+              component: userInfo
+            },
+            {
+              path: 'order',
+              name: 'order',
+              component: () => import("@/views/member/components/userOrder.vue")
+            }
+          ]
+        }
       ]
     },
     {

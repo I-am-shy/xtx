@@ -11,7 +11,7 @@ const confirm = () => {
     clearUserInfo();
     // 跳转到登录页
     router.push('/login');
-    ElMessage({ message: '退出登录成功', type: 'success' })
+    ElMessage({ message: '退出登录成功', type: 'info' })
 }
 
 </script>
@@ -32,8 +32,8 @@ const confirm = () => {
                         </el-popconfirm>
                     </li>
 
-                    <li><a href="javascpript:;">我的订单</a></li>
-                    <li><a href="javascpript:;">会员中心</a></li>
+                    <li><a href="javascpript:;" @click="$router.push('/member/order')">我的订单</a></li>
+                    <li><a href="javascpript:;" @click="$router.push('/member')">会员中心</a></li>
                 </template>
                 <template v-else>
                     <li><a href="javascpript:;" @click="$router.push('/login')">请先登录</a></li>

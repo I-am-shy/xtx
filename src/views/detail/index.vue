@@ -1,21 +1,22 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute,onBeforeRouteUpdate } from 'vue-router';
 import { getDetail } from "@/apis/detail.js"
-import { ref, onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import detailHot from "@/views/detail/components/detailHot.vue"
 import { ElMessage } from 'element-plus';
 import { useCartStore} from "@/stores/cart.js";
 
+
 const cartStore = useCartStore();
 const route = useRoute();
 const detailData = ref({});
-const getDetailData = async () => {
-    const res = await getDetail(route.params.id);
+const getDetailData = async (id) => {//设置参数，同页面跳转时，使用新页面的参数（to），使用默认参数，由于是异步函数会带上原页面的参数读取数据
+    const res = await getDetail(id);
     detailData.value = res.result;
-    // console.log(res.result);
+    // console.log(res.result,route.params.id);
 }
 onMounted(() => {
-    getDetailData();
+    getDetailData(route.params.id);
 });
 
 //传递数据
@@ -33,7 +34,7 @@ const SkuSelect = (sku) => {
 }
 
 const countChange = ()=>{
-    console.log(count.value);
+    // console.log(count.value);
 }
 
 const addCart = ()=>{
@@ -51,12 +52,24 @@ const addCart = ()=>{
             specsText: data.specsText,
             selected: true
         });
+        console.log(count.value,data)
         ElMessage({type:'success',message:'添加成功'});
     }else{
         // 没有选完规格
         ElMessage({type:'warning',message:'请选择完整规格和正确的数量' })
     }
 }
+
+onBeforeRouteUpdate((to,from,next)=>{//原页面跳转
+  // 在这里执行一些操作，例如保存数据
+  // ...
+    console.log(to,from,next);
+    // 刷新页面
+    detailData.value={};//清空原数据
+    getDetailData(to.params.id);//获取新数据,
+  // 调用 next() 函数，继续导航
+    next();
+})
 
 </script>
 
@@ -172,6 +185,7 @@ const addCart = ()=>{
                 </div>
             </div>
         </div>
+        <div v-else style="width: 100%;height: 100vh;background-color: white;transition: 0.5s;opacity: 0.5;font-size: 4em;text-align: center;">loading</div>
     </div>
 </template>
 

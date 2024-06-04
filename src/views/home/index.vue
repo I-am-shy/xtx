@@ -4,7 +4,6 @@ import HomeCategory from './components/HomeCategory.vue'
 import HomeNew from './components/HomeNew.vue'
 import HomeHot from './components/HomeHot.vue'
 import HomeProduct from './components/HomeProduct.vue'
-import HomePanel from './components/HomePanel.vue'
 
 </script>
 
@@ -17,9 +16,6 @@ import HomePanel from './components/HomePanel.vue'
   <HomeNew />
   <HomeHot />
   <HomeProduct />
-  <HomePanel title="我是标题" subTitle="我是子标题">
-    content
-  </HomePanel>
 </template>
 
 <style scoped>

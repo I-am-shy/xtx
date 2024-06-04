@@ -1,6 +1,10 @@
 <script setup>
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import { useCartStore } from '@/stores/cart.js'
 const cartData = useCartStore()
+
 
 </script>
 
@@ -13,7 +17,8 @@ const cartData = useCartStore()
             <div class="list">
                 <!-- 渲染商品列表 -->
                 <div class="item" v-for="i in cartData.cartList" :key="i">
-                    <RouterLink to="">
+                    <RouterLink :to="`/detail/${i.id}`">
+                        <!-- 在详细页不会发生跳转 -->
                         <img :src="i.picture" alt="" />
                         <div class="center">
                             <p class="name ellipsis-2">
@@ -22,7 +27,7 @@ const cartData = useCartStore()
                             <p class="attr ellipsis">{{ i.attrsText }}</p>
                         </div>
                         <div class="right">
-                            <p class="price">&yen;{{  i.count * i.price }}</p>
+                            <p class="price">&yen;{{ i.count * i.price }}</p>
                             <p class="count">x{{ i.count }}</p>
                         </div>
                     </RouterLink>

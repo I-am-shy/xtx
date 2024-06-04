@@ -35,7 +35,7 @@ onMounted(()=>{
     <div class="goods-hot">
         <h3>周日榜单</h3>
         <!-- 商品区块 -->
-        <RouterLink to="/" class="goods-item" v-for="item in detailHotList" :key="item.id">
+        <RouterLink :to="`/detail/${item.id}`" class="goods-item" v-for="item in detailHotList" :key="item.id">
             <img v-lazy="item.picture" alt="" />
             <p class="name ellipsis">{{ item.name }}</p>
             <p class="desc ellipsis">{{ item.desc }}</p>

@@ -1,7 +1,7 @@
 <script setup>
 import { useCartStore } from '@/stores/cart.js'
 const cartData = useCartStore()
-
+// console.log(cartData.cartList.length)
 function change(i,selected){
     // console.log(i,selected);
     cartData.selectChange(i.skuId,selected);
@@ -10,6 +10,7 @@ function AllChange(selected){
     // console.log(selected);
     cartData.AllSelected(selected)
 }
+
 </script>
 
 <template>
@@ -70,7 +71,7 @@ function AllChange(selected){
                             <td colspan="6">
                                 <div class="cart-none">
                                     <el-empty description="购物车列表为空">
-                                        <el-button type="primary">随便逛逛</el-button>
+                                        <el-button type="primary" @click="$router.push('/')">随便逛逛</el-button>
                                     </el-empty>
                                 </div>
                             </td>
@@ -86,7 +87,7 @@ function AllChange(selected){
                     <span class="red">¥ {{ cartData.selectedTatol }} </span>
                 </div>
                 <div class="total">
-                    <el-button size="large" type="primary">下单结算</el-button>
+                    <el-button size="large" type="primary" @click="$router.push('/Checkout')">下单结算</el-button>
                 </div>
             </div>
         </div>

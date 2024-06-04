@@ -72,7 +72,7 @@ export const useCartStore = defineStore('cart', () => {
     const selectedSum = computed(() => cartList.value.filter(item => item.selected).reduce((sum, item) => sum + item.count, 0))// 计算选中的商品数量
     const selectedTatol = computed(() => cartList.value.filter(item => item.selected).reduce((total, item) => total + item.count * item.price, 0))// 计算选中的商品数量
     //判断全选
-    const isAllSelected = computed(() => cartList.value.every(item => item.selected));//为每个数组元素返回真值，则为 true。否则为 false。
+    const isAllSelected = computed(() => cartList.value.length>0?cartList.value.every(item => item.selected):false);//为每个数组元素返回真值，则为 true。否则为 false,列表为空也是false。
 
     return {
         cartList, // 购物车列表

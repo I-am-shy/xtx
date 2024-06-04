@@ -14,7 +14,7 @@ export const lazyPlugin = {
             //监听图片是否在视口内，如果在，则加载图片
             const observer = new IntersectionObserver((entries) => {// 原生的观察视口api
                 if (entries[0].isIntersecting > observer.thresholds[0]) {//如果图片出现在视口内
-                    el.src = binding.value
+                    el.src = binding.value;
                     observer.unobserve(el)//停止监听，节省资源
                     // console.log('图片出现在视口内')
                 }
